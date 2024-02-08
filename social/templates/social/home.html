@@ -13,38 +13,278 @@
 	<title>home</title>
 </head>
 <body>
-    <div class="container-fluid px-1 py-5 mx-auto">
+    
+    <div class="container-fluid px-1 py-2 mx-auto">
+        <!-- alerte-->
+        <div class="alert alert-success" role="alert" style="display: none;">
+            <div class="d-flex gap-4">
+              <span><i class="fa fa-info text-success"></i></span>
+              <div>
+                <p>Résultat de la prédiction : {{ prediction }}</p>
+              </div>
+            </div>
+          </div>
+          <!-- alerte-->
         <div class="row d-flex justify-content-center">
             <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-                <h3>RS MAURITANIE CLASSIFICATION DE MENAGES PAUVES</h3>
-                <div class="card">
-                    <form class="form-card" onsubmit="event.preventDefault()">
+                <h3 class="titre">RS MAURITANIE CLASSIFICATION DE MENAGES PAUVRES</h3>
+                <form class="form-card" onsubmit="event.preventDefault()">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="icon-tab-0" data-bs-toggle="tab" href="#icon-tabpanel-0" role="tab" aria-controls="icon-tabpanel-0" aria-selected="true"><i class="fa fa-water"></i> Santé Edu Eaux</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="icon-tab-1" data-bs-toggle="tab" href="#icon-tabpanel-1" role="tab" aria-controls="icon-tabpanel-1" aria-selected="false"><i class="fa fa-bolt"></i> Elect Elec-menagé</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="icon-tab-2" data-bs-toggle="tab" href="#icon-tabpanel-2" role="tab" aria-controls="icon-tabpanel-2" aria-selected="false"><i class="fa fa-home"></i>Logtm Terre</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="icon-tab-3" data-bs-toggle="tab" href="#icon-tabpanel-3" role="tab" aria-controls="icon-tabpanel-3" aria-selected="false"><i class="fa fa-dog"></i>Transp Betail</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="icon-tab-4" data-bs-toggle="tab" href="#icon-tabpanel-4" role="tab" aria-controls="icon-tabpanel-4" aria-selected="false"><i class="fa fa-save"></i></a>
+                        </li>
+                    </ul>
+                <div class="tab-content" id="tab-content">
+                    <!-- debut de la table liste-->
+                    <div class="tab-pane active" id="icon-tabpanel-0" role="tabpanel" aria-labelledby="icon-tab-0">
+                        <div class="card">
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPPStructSanteFK<span class="text-danger"> *</span></label> <input type="number" id="MenPPStructSanteFK" name="MenPPStructSanteFK" placeholder="" onblur="validate(1)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPPdistStructSanteFK<span class="text-danger"> *</span></label> <input type="number" id="MenPPdistStructSanteFK" name="MenPPdistStructSanteFK" placeholder="" onblur="validate(2)"> </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPPEcolePrimFK<span class="text-danger"> *</span></label> <input type="number" id="MenPPEcolePrimFK" name="MenPPEcolePrimFK" placeholder="" onblur="validate(3)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPPCollegeFK<span class="text-danger"> *</span></label> <input type="number" id="MenPPCollegeFK" name="MenPPCollegeFK" placeholder="" onblur="validate(4)"> </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPPdistEcolePrimFK<span class="text-danger"> *</span></label> <input type="number" id="MenPPdistEcolePrimFK" name="MenPPdistEcolePrimFK" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPPdistCollegeFK<span class="text-danger"> *</span></label> <input type="number" id="MenPPdistCollegeFK" name="MenPPdistCollegeFK" placeholder="" onblur="validate(5)"> </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPSAEBFK<span class="text-danger"> *</span></label> <input type="number" id="MenPSAEBFK" name="MenPSAEBFK" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPPSouceEauFK<span class="text-danger"> *</span></label> <input type="number" id="MenPPSouceEauFK" name="MenPPSouceEauFK" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPPdistSourceEauFK<span class="text-danger"> *</span></label> <input type="number" id="MenPPdistSourceEauFK" name="MenPPdistSourceEauFK" placeholder="" onblur="validate(6)"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- fin de la table liste-->
+
+                    <!-- debut de la table liste-->
+                    <div class="tab-pane" id="icon-tabpanel-1" role="tabpanel" aria-labelledby="icon-tab-1">
+                        <div class="card">
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossGrpEl<span class="text-danger"> *</span></label> <input type="number" id="MenPossGrpEl" name="MenPossGrpEl" placeholder="" onblur="validate(1)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenSEEclFK<span class="text-danger"> *</span></label> <input type="number" id="MenSEEclFK" name="MenSEEclFK" placeholder="" onblur="validate(2)"> </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenSECuisFK<span class="text-danger"> *</span></label> <input type="number" id="MenSECuisFK" name="MenSECuisFK" placeholder="" onblur="validate(3)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossSalon<span class="text-danger"> *</span></label> <input type="number" id="MenPossSalon" name="MenPossSalon" placeholder="" onblur="validate(4)"> </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossLitMat<span class="text-danger"> *</span></label> <input type="number" id="MenPossLitMat" name="MenPossLitMat" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossRefr<span class="text-danger"> *</span></label> <input type="number" id="MenPossRefr" name="MenPossRefr" placeholder="" onblur="validate(5)"> </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossClim<span class="text-danger"> *</span></label> <input type="number" id="MenPossClim" name="MenPossClim" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossVent<span class="text-danger"> *</span></label> <input type="number" id="MenPossVent" name="MenPossVent" placeholder="" onblur="validate(6)"> </div>
+                                
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossMatelas<span class="text-danger"> *</span></label> <input type="number" id="MenPossMatelas" name="MenPossMatelas" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossMatelas<span class="text-danger"> *</span></label> <input type="number" id="MenPossMatelas" name="MenPossMatelas" placeholder="" onblur="validate(6)"> </div>
+                            </div>
+                            
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossAutreMeubl<span class="text-danger"> *</span></label> <input type="number" id="MenPossAutreMeubl" name="MenPossAutreMeubl" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossFer<span class="text-danger"> *</span></label> <input type="number" id="MenPossFer" name="MenPossFer" placeholder="" onblur="validate(6)"> </div>
+                            </div>
+                    
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossCB<span class="text-danger"> *</span></label> <input type="number" id="MenPossCB" name="MenPossCB" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossCuisMdrn<span class="text-danger"> *</span></label> <input type="number" id="MenPossCuisMdrn" name="MenPossCuisMdrn" placeholder="" onblur="validate(6)"> </div>
+                                
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossTelPort<span class="text-danger"> *</span></label> <input type="number" id="MenPossTelPort" name="MenPossTelPort" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossChauffEau<span class="text-danger"> *</span></label> <input type="number" id="MenPossChauffEau" name="MenPossChauffEau" placeholder="" onblur="validate(6)"> </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossTelFix<span class="text-danger"> *</span></label> <input type="number" id="MenPossTelFix" name="MenPossTelFix" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossMachLav<span class="text-danger"> *</span></label> <input type="number" id="MenPossMachLav" name="MenPossMachLav" placeholder="" onblur="validate(6)"> </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-12 flex-column d-flex"> <label class="form-control-label px-3">MenPossTelv<span class="text-danger"> *</span></label> <input type="number" id="MenPossTelv" name="MenPossTelv" placeholder="" onblur="validate(6)"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- fin de la table liste-->
+
+                    <!-- debut de la table liste-->
+                    <div class="tab-pane" id="icon-tabpanel-2" role="tabpanel" aria-labelledby="icon-tab-2">
+                        <div class="card">
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenTerHabit<span class="text-danger"> *</span></label> <input type="number" id="MenTerHabit" name="MenTerHabit" placeholder="" onblur="validate(1)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenTerAgr<span class="text-danger"> *</span></label> <input type="number" id="MenTerAgr" name="MenTerAgr" placeholder="" onblur="validate(2)"> </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">etSupT<span class="text-danger"> *</span></label> <input type="number" id="etSupT" name="etSupT" placeholder="" onblur="validate(3)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">autT<span class="text-danger"> *</span></label> <input type="number" id="autT" name="autT" placeholder="" onblur="validate(4)"> </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">etSupAutT<span class="text-danger"> *</span></label> <input type="number" id="etSupAutT" name="etSupAutT" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenTypToiletFK<span class="text-danger"> *</span></label> <input type="number" id="MenTypToiletFK" name="MenTypToiletFK" placeholder="" onblur="validate(5)"> </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenNbrMembr<span class="text-danger"> *</span></label> <input type="number" id="MenNbrMembr" name="MenNbrMembr" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenLogStatFK<span class="text-danger"> *</span></label> <input type="number" id="MenLogStatFK" name="MenLogStatFK" placeholder="" onblur="validate(6)"> </div>
+                            </div>
+
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenNbrPiecesLog<span class="text-danger"> *</span></label> <input type="number" id="MenNbrPiecesLog" name="MenNbrPiecesLog" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossLogmtFK<span class="text-danger"> *</span></label> <input type="number" id="MenPossLogmtFK" name="MenPossLogmtFK" placeholder="" onblur="validate(6)"> </div>
+                            </div>
+
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenTypLogeFK<span class="text-danger"> *</span></label> <input type="number" id="MenTypLogeFK" name="MenTypLogeFK" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenMatToitLogeFK<span class="text-danger"> *</span></label> <input type="number" id="MenMatToitLogeFK" name="MenMatToitLogeFK" placeholder="" onblur="validate(6)"> </div>
+                            </div>
+
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenMatMurLogeFK<span class="text-danger"> *</span></label> <input type="number" id="MenMatMurLogeFK" name="MenMatMurLogeFK" placeholder="" onblur="validate(6)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenNatSolLogeFK<span class="text-danger"> *</span></label> <input type="number" id="MenNatSolLogeFK" name="MenNatSolLogeFK" placeholder="" onblur="validate(6)"> </div>
+                            </div>
+                        </div>
+                    </div>
+                   <!-- fin de la table liste-->
+                   <!-- debut de la table liste-->
+                   <div class="tab-pane" id="icon-tabpanel-3" role="tabpanel" aria-labelledby="icon-tab-3">
+                    <div class="card">
                         <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPSAEBFK<span class="text-danger"> *</span></label> <input type="text" id="fname" name="fname" placeholder="Enter your first name" onblur="validate(1)"> </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossGrpEl<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">nbrBovinCamelins<span class="text-danger"> *</span></label> <input type="number" id="nbrBovinCamelins" name="nbrBovinCamelins" placeholder="" onblur="validate(1)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">ancienEtatBC<span class="text-danger"> *</span></label> <input type="number" id="ancienEtatBC" name="ancienEtatBC" placeholder="" onblur="validate(2)"> </div>
                         </div>
                         <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenSECuisFK<span class="text-danger"> *</span></label> <input type="text" id="email" name="email" placeholder="" onblur="validate(3)"> </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phone number<span class="text-danger"> *</span></label> <input type="text" id="mob" name="mob" placeholder="" onblur="validate(4)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">nbrMoutonsChevres<span class="text-danger"> *</span></label> <input type="number" id="nbrMoutonsChevres" name="nbrMoutonsChevres" placeholder="" onblur="validate(3)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">ancienEtatMC<span class="text-danger"> *</span></label> <input type="number" id="ancienEtatMC" name="ancienEtatMC" placeholder="" onblur="validate(4)"> </div>
                         </div>
                         <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossPrg<span class="text-danger"> *</span></label> <input type="text" id="MenPossPrg" name="MenPossPrg" placeholder="" onblur="validate(6)"> </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenTypToiletFK<span class="text-danger"> *</span></label> <input type="text" id="job" name="job" placeholder="" onblur="validate(5)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">nbrAnsChevaux<span class="text-danger"> *</span></label> <input type="number" id="nbrAnsChevaux" name="nbrAnsChevaux" placeholder="" onblur="validate(6)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">ancienEtatAC<span class="text-danger"> *</span></label> <input type="number" id="ancienEtatAC" name="ancienEtatAC" placeholder="" onblur="validate(5)"> </div>
                         </div>
                         <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossPrg<span class="text-danger"> *</span></label> <input type="text" id="ans" name="ans" placeholder="" onblur="validate(6)"> </div>
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossPrg<span class="text-danger"> *</span></label> <input type="text" id="ans" name="ans" placeholder="" onblur="validate(6)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">nbrVolailles<span class="text-danger"> *</span></label> <input type="number" id="nbrVolailles" name="nbrVolailles" placeholder="" onblur="validate(6)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">ancienEtatVolailles<span class="text-danger"> *</span></label> <input type="number" id="ancienEtatVolailles" name="ancienEtatVolailles" placeholder="" onblur="validate(6)"> </div>
                         </div>
-                        <div class="row justify-content-end mt-2">
-                            <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Valider</button> </div>
+
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossPrg<span class="text-danger"> *</span></label> <input type="number" id="MenPossPrg" name="MenPossPrg" placeholder="" onblur="validate(6)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossCharet<span class="text-danger"> *</span></label> <input type="number" id="MenPossCharet" name="MenPossCharet" placeholder="" onblur="validate(6)"> </div>
                         </div>
-                    </form>
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossBrt<span class="text-danger"> *</span></label> <input type="number" id="MenPossBrt" name="MenPossBrt" placeholder="" onblur="validate(6)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossAntenne<span class="text-danger"> *</span></label> <input type="number" id="MenPossAntenne" name="MenPossAntenne" placeholder="" onblur="validate(6)"> </div>
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossRadio<span class="text-danger"> *</span></label> <input type="number" id="MenPossRadio" name="MenPossRadio" placeholder="" onblur="validate(6)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossVoiture<span class="text-danger"> *</span></label> <input type="number" id="MenPossVoiture" name="MenPossVoiture" placeholder="" onblur="validate(6)"> </div>
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossOrd<span class="text-danger"> *</span></label> <input type="number" id="MenPossOrd" name="MenPossOrd" placeholder="" onblur="validate(6)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossInternet<span class="text-danger"> *</span></label> <input type="number" id="MenPossInternet" name="MenPossInternet" placeholder="" onblur="validate(6)"> </div>
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPossMoto<span class="text-danger"> *</span></label> <input type="number" id="MenPossMoto" name="nbrVoMenPossMotolailles" placeholder="" onblur="validate(6)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPPTransportFK<span class="text-danger"> *</span></label> <input type="number" id="MenPPTransportFK" name="MenPPTransportFK" placeholder="" onblur="validate(6)"> </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPPTeleServicesFK<span class="text-danger"> *</span></label> <input type="number" id="MenPPTeleServicesFK" name="MenPPTeleServicesFK" placeholder="" onblur="validate(6)"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">MenPPdistTransportFK<span class="text-danger"> *</span></label> <input type="number" id="MenPPdistTransportFK" name="MenPPdistTransportFK" placeholder="" onblur="validate(6)"> </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-12 flex-column d-flex"> <label class="form-control-label px-3">MenPPdistTeleServicesFK<span class="text-danger"> *</span></label> <input type="number" id="MenPPdistTeleServicesFK" name="MenPPdistTeleServicesFK" placeholder="" onblur="validate(6)"> </div>
+                        </div>
+                        
+                    </div>
+                    </div>
+                        <!-- fin de la table liste-->
+                    
+                        <!-- debut de la table liste-->
+                        <div class="tab-pane" id="icon-tabpanel-4" role="tabpanel" aria-labelledby="icon-tab-4">
+                            <div class="card">
+                                <div class="row justify-content-end mt-2">
+                                    <img class="logo_mauritanie" alt="Cinque Terre" src="{% static 'media/app_img/logo.svg' %}">
+                                    <div class="form-group col-sm-6">
+                                        <button type="submit" class="btn-block btn-primary">Valider</button> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin de la table liste-->
                 </div>
+                </form>
             </div>
         </div>
     </div>
 
 
+
 <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sélection du formulaire
+        var form = document.querySelector('.form-card');
+    
+        // Ajout d'un gestionnaire d'événements sur la soumission du formulaire
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêcher le comportement par défaut du formulaire (rechargement de la page)
+    
+            // Récupération des valeurs des champs de nombre
+            var formData = {};
+    
+            // Récupération des champs de nombre
+            var numberFields = form.querySelectorAll('input[type="number"]');
+            numberFields.forEach(function(input) {
+                formData[input.name] = parseFloat(input.value); // Utilisation de parseFloat pour convertir la valeur en nombre décimal
+            });
+    
+            // Vous pouvez maintenant utiliser formData pour faire quelque chose avec les données du formulaire
+            console.log(formData);
+    
+            // Effacer les données des champs après soumission
+            numberFields.forEach(function(input) {
+                input.value = ''; // Réinitialiser la valeur du champ à une chaîne vide
+            });
+    
+            // Par exemple, vous pouvez les envoyer à un serveur via une requête AJAX
+            /*
+            fetch('predictmodel', {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Faites quelque chose avec la réponse du serveur
+            })
+            .catch(error => {
+                console.error('Erreur lors de l\'envoi des données:', error);
+            });
+            */
+        });
+    });          
+</script>
+
+
 </body>
 </html>

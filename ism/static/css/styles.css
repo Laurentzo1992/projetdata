@@ -4,6 +4,7 @@ body {
     height: 100%;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    background: linear-gradient(#bbdf1c, #238f30);
 }
 
 .card {
@@ -14,8 +15,8 @@ body {
     box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
 }
 
-.blue-text {
-    color: #00BCD4;
+.titre{
+    color: #9e2e0f;
 }
 
 .form-control-label {
@@ -58,4 +59,11 @@ button:focus {
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
     outline-width: 0;
+}
+
+.logo_mauritanie{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
 }
