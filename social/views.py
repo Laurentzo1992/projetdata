@@ -1,93 +1,37 @@
 from django.shortcuts import render
-import joblib
-from django.http import HttpResponse, JsonResponse
-import json
 from django.conf import settings
 import pickle
-modele = settings.BASE_DIR / 'datas' / 'model.pkl'
-
-
-
-def home(request):
-    return render(request, 'social/home.html')
-
-
+from social.models import PredictionPauvrete
+from django.core.paginator import Paginator
 
 def predict_model(request):
     if request.method == 'POST':
-        # Récupérez les données JSON envoyées dans le corps de la requête
-        data = json.loads(request.body)
-        
-        MenPPStructSanteFK = data.get('MenPPStructSanteFK')
-        MenPPdistStructSanteFK = data.get('MenPPdistStructSanteFK')
-        MenPPEcolePrimFK = data.get('MenPPEcolePrimFK')
-        MenPPCollegeFK = data.get('MenPPCollegeFK')
-        MenPPdistEcolePrimFK = data.get('MenPPdistEcolePrimFK')
-        MenPPdistCollegeFK = data.get('MenPPdistCollegeFK')
-        MenPSAEBFK = data.get('MenPSAEBFK')
-        MenPPSouceEauFK = data.get('MenPPSouceEauFK')
-        MenPPdistSourceEauFK = data.get('MenPPdistSourceEauFK')
-        MenPossGrpEl = data.get('MenPossGrpEl')
-        MenSEEclFK = data.get('MenSEEclFK')
-        MenSECuisFK = data.get('MenSECuisFK')
-        MenPossSalon = data.get('MenPossSalon')
-        MenPossLitMat = data.get('MenPossLitMat')
-        MenPossRefr = data.get('MenPossRefr')
-        MenPossClim = data.get('MenPossClim')
-        MenPossVent = data.get('MenPossVent')
-        MenPossMatelas = data.get('MenPossMatelas')
-        MenPossAutreMeubl = data.get('MenPossAutreMeubl')
-        MenPossFer = data.get('MenPossFer')
-        MenPossTelv = data.get('MenPossTelv')
-        MenPossCB = data.get('MenPossCB')
-        MenPossCuisMdrn = data.get('MenPossCuisMdrn')
-        MenPossTelFix = data.get('MenPossTelFix')
-        MenPossTelPort = data.get('MenPossTelPort')
-        MenPossChauffEau = data.get('MenPossChauffEau')
-        MenPossMachLav = data.get('MenPossMachLav')
-        MenTypToiletFK = data.get('MenTypToiletFK')
-        MenNbrMembr = data.get('MenNbrMembr')
-        MenLogStatFK = data.get('MenLogStatFK')
-        MenNbrPiecesLog = data.get('MenNbrPiecesLog')
-        MenPossLogmtFK = data.get('MenPossLogmtFK')
-        MenTypLogeFK = data.get('MenTypLogeFK')
-        MenMatToitLogeFK = data.get('MenMatToitLogeFK')
-        MenMatMurLogeFK = data.get('MenMatMurLogeFK')
-        MenNatSolLogeFK = data.get('MenNatSolLogeFK')
-        MenPossPrg = data.get('MenPossPrg')
-        MenPossCharet = data.get('MenPossCharet')
-        MenPossBrt = data.get('MenPossBrt')
-        MenPossAntenne = data.get('MenPossAntenne')
-        MenPossRadio = data.get('MenPossRadio')
-        MenPossVoiture = data.get('MenPossVoiture')
-        MenPossOrd = data.get('MenPossOrd')
-        MenPossInternet = data.get('MenPossInternet')
-        MenPossMoto = data.get('MenPossMoto')
-        MenPPTransportFK = data.get('MenPPTransportFK')
-        MenPPTeleServicesFK = data.get('MenPPTeleServicesFK')
-        MenPPdistTransportFK = data.get('MenPPdistTransportFK')
-        MenPPdistTeleServicesFK = data.get('MenPPdistTeleServicesFK')
-        nbrBovinCamelins = data.get('nbrBovinCamelins')
-        ancienEtatBC = data.get('ancienEtatBC')
-        nbrMoutonsChevres = data.get('nbrMoutonsChevres')
-        ancienEtatMC = data.get('ancienEtatMC')
-        nbrAnsChevaux = data.get('nbrAnsChevaux')
-        ancienEtatAC = data.get('ancienEtatAC')
-        nbrVolailles = data.get('nbrVolailles')
-        ancienEtatVolailles = data.get('ancienEtatVolailles')
-        MenTerHabit = data.get('MenTerHabit')
-        MenTerAgr = data.get('MenTerAgr')
-        etSupT = data.get('etSupT')
-        autT = data.get('autT')
-        etSupAutT = data.get('etSupAutT')
-        
-        # Recupérer les features
+        data = request.POST
         features = []
-        # Effectuez vos opérations, par exemple, faire une prédiction avec votre modèle de machine learning
-        prediction = modele.predict([features])
-        # Retournez les résultats sous forme de réponse JSON
-        return JsonResponse({'prediction': 'prediction'})
-    else:
-        # Gérez les autres méthodes HTTP si nécessaire
-        return JsonResponse({'error': 'Méthode HTTP non autorisée'}, status=405)
+        for key in data.keys():
+            try:
+                value = float(data.get(key, 1))  # Convertir les valeurs en float
+            except ValueError:
+                value = 1.0  # Remplacer par une valeur par défaut si la conversion échoue
+            features.append(value)
+        
+        # Chargement du modèle
+        modele_path = settings.BASE_DIR / 'datas' / 'model.pkl'
+        with open(modele_path, "rb") as f:
+            modele = pickle.load(f)
+        
+        # Effectuer la prédiction avec votre modèle de machine learning
+        prediction = modele.predict([features])  # Obtenir la première prédiction
 
+        # Enregistrement de la prédiction dans la base de données
+        prediction_obj = PredictionPauvrete(result=prediction)
+        prediction_obj.save()
+
+        # Récupérer toutes les prédictions enregistrées
+        results = PredictionPauvrete.objects.all().order_by('created_at')
+        context = {"results":results}
+        # Retourner les résultats dans le même template
+        return render(request, 'social/home.html', context)
+    else:
+        # Gérer les autres méthodes HTTP si nécessaire
+        return render(request, 'social/home.html')
